@@ -1,4 +1,4 @@
-import shapes.*;
+import shapes.*;                                
 import java.util.Scanner;
 
 public class Assignment3Driver {
@@ -6,13 +6,14 @@ public class Assignment3Driver {
         Scanner scanner = new Scanner(System.in);
         Scene game = new Scene();
         Person player = game.getPlayer();
+        player.changeColor(Configuration.getInstance().getPlayerColor());
 
         PlayerController controller = new PlayerController();
 
-        Command up = new MoveUpCommand(player);
-        Command down = new MoveDownCommand(player);
-        Command left = new MoveLeftCommand(player);
-        Command right = new MoveRightCommand(player);
+        Command up = new MoveUpCommand(player, game);
+        Command down = new MoveDownCommand(player, game);
+        Command left = new MoveLeftCommand(player, game);
+        Command right = new MoveRightCommand(player, game);
 
         controller.setCommand('w', up);
         controller.setCommand('s', down);
@@ -23,14 +24,15 @@ public class Assignment3Driver {
         controller.setCommand('A', left);
         controller.setCommand('D', right);
 
-        Command macroLeft1 = new MoveLeftCommand(player);
+        Command macroLeft1 = new MoveLeftCommand(player, game);
         macroLeft1.setDistance(20);
-        Command macroUp = new MoveUpCommand(player);
-        Command macroLeft2 = new MoveLeftCommand(player);
+        Command macroUp = new MoveUpCommand(player, game);
+        Command macroLeft2 = new MoveLeftCommand(player, game);
         macroLeft2.setDistance(20);
-        controller.setCommand('h', new MacroCommand(macroLeft1, macroUp, macroLeft2));
+        controller.setCommand('h', new MacroCommand(game, macroLeft1, macroUp, macroLeft2));
 
-        while (true) {
+       
+        while (!game.isHomeReached()) {
             System.out.print("Enter key: ");
             char key = scanner.next().charAt(0);
             if (key == 'q') break;

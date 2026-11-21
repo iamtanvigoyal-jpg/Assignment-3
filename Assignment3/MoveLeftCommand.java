@@ -1,8 +1,8 @@
 import shapes.Person;
 
 public class MoveLeftCommand extends Command {
-    public MoveLeftCommand(Person p) {
-        super(p, 10);
+    public MoveLeftCommand(Person p, Scene s) { 
+        super(p, s, 10);                        
     }
 
     public void execute() {

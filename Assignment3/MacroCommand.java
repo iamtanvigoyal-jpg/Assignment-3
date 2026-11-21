@@ -1,8 +1,8 @@
 public class MacroCommand extends Command {
     private Command[] commands;
 
-    public MacroCommand(Command... commands) {
-        super(null, 0);
+    public MacroCommand(Scene s, Command... commands) {
+        super(null, s, 0);
         this.commands = commands;
     }
 
@@ -17,6 +17,7 @@ public class MacroCommand extends Command {
             commands[i].undo();
         }
     }
+
     @Override
     public void setDistance(int d) {
     }

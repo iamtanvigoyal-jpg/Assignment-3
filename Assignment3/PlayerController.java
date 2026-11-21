@@ -19,13 +19,13 @@ public class PlayerController {
         if (key == 'u') {
             if (!undoStack.isEmpty()) {
                 Command c = undoStack.pop();
-                c.undo();                        
+                c.undoWithLog();
                 redoStack.push(c);
             }
         } else if (key == 'r') {
             if (!redoStack.isEmpty()) {
                 Command c = redoStack.pop();
-                c.execute();                    
+                c.executeWithLog();
                 undoStack.push(c);
             }
         } else {
@@ -33,8 +33,8 @@ public class PlayerController {
             if (stored != null) {
                 Command c = stored.clone();
                 c.setDistance(Character.isUpperCase(key) ? 20 : 10);
-                c.execute();                    
-                undoStack.push(c);
+                c.executeWithLog();
+                undoStack.push(c);             
                 redoStack.clear();
             }
         }
